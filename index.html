@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jacob Gehring — Engineering Portfolio</title>
+<meta name="description" content="Jacob Gehring, mechanical engineering student at Hope College — AUV power systems, CAD design, and hands-on fabrication.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Archivo+Expanded:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAFAF8;
+    --panel: #F1EFEA;
+    --ink: #14191E;
+    --muted: #5B6570;
+    --line: #DDD9D0;
+    --navy: #0D1B24;
+    --navy-2: #16303F;
+    --navy-line: rgba(255,255,255,0.14);
+    --yellow: #E8AC1F;
+    --yellow-ink: #4A3300;
+    --blue: #2E6E8E;
+    --white: #FFFFFF;
+    --max: 1180px;
+    --radius: 3px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Archivo', sans-serif;
+    font-weight:400;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Archivo Expanded','Archivo',sans-serif;
+    font-weight:800;
+    margin:0;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  section{position:relative;}
+  .eyebrow{
+    font-size:0.8rem;
+    color:var(--muted);
+    margin:0 0 10px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(250,250,248,0.96);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:0 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:60px;
+  }
+  .nav-name{
+    font-weight:800; font-size:1.02rem; text-decoration:none;
+    color:var(--ink);
+  }
+  .nav-links{
+    display:flex; gap:26px; list-style:none; margin:0; padding:0;
+  }
+  .nav-links a{
+    text-decoration:none; font-size:0.9rem; color:var(--ink);
+    padding-bottom:3px; border-bottom:2px solid transparent;
+  }
+  .nav-links a:hover{border-bottom-color:var(--yellow);}
+  .nav-toggle{display:none;}
+  section[id]{scroll-margin-top:70px;}
+
+  @media (max-width: 820px){
+    .nav-links{
+      position:fixed; top:60px; left:0; right:0;
+      background:var(--bg); border-bottom:1px solid var(--line);
+      flex-direction:column; gap:0; padding:8px 28px 18px;
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:10px 0; border-bottom:1px solid var(--line);}
+    .nav-toggle{
+      display:block; background:none; border:1px solid var(--line);
+      border-radius:var(--radius); width:38px; height:34px; cursor:pointer;
+    }
+  }
+
+  /* ---------- HERO (title slide) ---------- */
+  .hero{
+    background:var(--navy);
+    color:var(--white);
+    padding:150px 0 80px;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero-eyebrow{
+    font-size:0.85rem; color:var(--yellow); margin:0 0 18px;
+  }
+  .hero h1{
+    color:var(--white);
+    font-size:clamp(2.4rem, 5vw, 3.6rem);
+    line-height:1.05;
+  }
+  .hero p.tagline{
+    margin:22px 0 0; max-width:46ch;
+    font-size:1.1rem; color:#C9D3D9; font-weight:400;
+  }
+  .hero-meta{
+    margin-top:34px; display:flex; flex-direction:column; gap:8px;
+    font-size:0.95rem; color:#9FB0BB;
+  }
+  .hero-meta a{text-decoration:none; color:#D8E3E9; border-bottom:1px solid rgba(216,227,233,0.35);}
+  .hero-cta{
+    margin-top:34px; display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block; padding:12px 22px; border-radius:var(--radius);
+    font-size:0.92rem; font-weight:600; text-decoration:none; cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--yellow); color:var(--yellow-ink);}
+  .btn-primary:hover{background:#f2ba33;}
+  .btn-ghost{border-color:var(--navy-line); color:var(--white);}
+  .btn-ghost:hover{background:rgba(255,255,255,0.06);}
+
+  .hero-visual img{border:1px solid var(--navy-line);}
+
+  @media (max-width: 860px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero{padding-top:120px;}
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{
+    max-width:640px; margin:0 0 20px;
+  }
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.15rem);}
+  .section-head p{margin:14px 0 0; color:var(--muted); font-size:1.02rem;}
+
+  /* ---------- FEATURED / PROJECTS WRAPPER ---------- */
+  .featured{ background:var(--white); padding:80px 0 20px; border-bottom:1px solid var(--line); }
+  .projects{ background:var(--bg); padding:80px 0 20px; border-bottom:1px solid var(--line); }
+
+  /* ---------- SLIDE BLOCK (uniform project layout) ---------- */
+  .slide-block{
+    padding:46px 0;
+    border-top:1px solid var(--line);
+  }
+  .slide-block:first-of-type{border-top:none;}
+  .slide-tag{font-size:0.78rem; color:var(--blue); font-weight:700; margin:0 0 6px;}
+  .slide-block h3{font-size:1.3rem; margin-bottom:20px;}
+
+  .slide-images{display:grid; gap:10px; margin-bottom:26px;}
+  .slide-images img{width:100%; height:100%; object-fit:cover; border:1px solid var(--line);}
+  .slide-images img.fit{height:auto; object-fit:contain; align-self:start; background:#fff; padding:6px;}
+  .slide-images.imgs-1{grid-template-columns:minmax(0,860px); justify-content:center;}
+  .slide-images.imgs-1-wide{grid-template-columns:minmax(0,1080px); justify-content:center;}
+  .slide-images.imgs-2{grid-template-columns:1fr 1fr;}
+  .slide-images.imgs-3{grid-template-columns:1fr 1fr 1fr;}
+  .slide-images.imgs-4{grid-template-columns:repeat(4,1fr);}
+  @media (max-width:760px){
+    .slide-images.imgs-2, .slide-images.imgs-3, .slide-images.imgs-4{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:480px){
+    .slide-images.imgs-2, .slide-images.imgs-3, .slide-images.imgs-4{grid-template-columns:1fr;}
+  }
+
+  .slide-note{font-size:0.9rem; color:var(--muted); margin:-14px 0 26px; font-style:italic;}
+
+  .whr-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:30px;
+  }
+  .whr-col h4{
+    font-size:0.95rem; font-weight:700; color:var(--ink);
+    margin:0 0 10px; padding-bottom:8px; border-bottom:2px solid var(--yellow);
+  }
+  .whr-col ul{margin:0; padding-left:18px;}
+  .whr-col li{font-size:0.94rem; color:#33393E; margin-bottom:9px;}
+  @media (max-width:760px){
+    .whr-grid{grid-template-columns:1fr; gap:22px;}
+  }
+
+  .pseudocode{
+    background:var(--navy); color:#CFE3EE;
+    font-family:'Courier New', monospace;
+    font-size:0.8rem; line-height:1.55;
+    padding:20px 22px; overflow-x:auto;
+    margin-bottom:26px; white-space:pre;
+  }
+
+  /* ---------- CERTIFICATIONS ---------- */
+  .certifications{background:var(--bg); padding:80px 0; border-bottom:1px solid var(--line);}
+  .cert-image{max-width:480px; border:1px solid var(--line);}
+
+  /* ---------- RESUME ---------- */
+  .resume{
+    background:var(--panel); padding:70px 0; border-bottom:1px solid var(--line);
+    text-align:center;
+  }
+  .resume h2{font-size:1.6rem; margin-bottom:12px;}
+  .resume p{color:var(--muted); max-width:50ch; margin:0 auto 26px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy); color:#9FB0BB; padding:60px 0 34px;}
+  .footer-top{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px;
+    padding-bottom:34px; border-bottom:1px solid var(--navy-line); margin-bottom:24px;
+  }
+  .footer-top h3{color:var(--white); font-size:1.3rem; margin-bottom:10px;}
+  .footer-links{display:flex; flex-direction:column; gap:8px; font-size:0.92rem;}
+  .footer-links a{text-decoration:none; color:#C7D3D9;}
+  .footer-links a:hover{color:var(--yellow);}
+  .footer-bottom{font-size:0.8rem; color:#7A8B96; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-name">Jacob Gehring</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#work">Featured Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="top" class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Engineering Portfolio</p>
+      <h1>Jacob Gehring</h1>
+      <p class="tagline">Hope College, Holland, MI</p>
+      <div class="hero-cta">
+        <a href="#work" class="btn btn-primary">See featured work</a>
+        <a href="assets/resume/Jacob_Gehring_Resume.pdf" target="_blank" class="btn btn-ghost">Download resume</a>
+      </div>
+      <div class="hero-meta">
+        <a href="mailto:jacob.gehring@hope.edu">jacob.gehring@hope.edu</a>
+        <a href="tel:8593978869">(859) 397-8869</a>
+      </div>
+    </div>
+    <figure class="hero-visual">
+      <img src="assets/img/hero-with-auv.jpg" alt="Jacob standing next to the RAUV in the lab">
+    </figure>
+  </div>
+</section>
+
+<section id="work" class="featured">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Featured — Summer 2026</p>
+      <h2>Resident Autonomous Underwater Vehicle, University of Hawaiʻi</h2>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">University of Hawaiʻi · SOEST Internship</p>
+      <h3>Iver 3 SolidWorks Rendering</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/hero-iver3-desk.jpg" alt="Photo of the Iver 3 AUV on a workbench with calipers and a lab notebook">
+          <img src="assets/img/iver3-front.jpg" alt="SolidWorks front view render of the Iver 3 AUV">
+          <img class="fit" src="assets/img/hero-iver3-angle.jpg" alt="SolidWorks angled render of the Iver 3 AUV">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Developed a detailed SolidWorks scale model of an L3Harris Iver 3 autonomous underwater vehicle (AUV) for the University of Hawaiʻi SOEST Marine Center.</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Precisely measured individual AUV components using calipers and documented dimensions with hand-drawn reference diagrams following GD&amp;T principles.</li>
+          <li>Recreated individual components in SolidWorks from measured dimensions, then assembled them into a fully defined, dimensionally accurate model of the complete AUV.</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Established the model as the design foundation for a mounting system for a novel depth sensor and as a source for figures in an upcoming journal publication.</li>
+          <li>Earned special recognition from my supervisor for the model's level of detail, accuracy, and rapid completion.</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">University of Hawaiʻi · SOEST Internship</p>
+      <h3>Serial communication (CAN-bus)</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/canbus-1.jpg" alt="Two laptops connected for CAN bus troubleshooting">
+          <img src="assets/img/canbus-2.jpg" alt="CAN bus wiring setup on a workbench">
+          <img class="fit" src="assets/img/canbus-screen.jpg" alt="Serial terminal software used for CAN bus diagnostics">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Troubleshot a damaged Wibotic OC-210 inductive charger using CAN serial communication to isolate the source of the failure</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Established serial connection between two laptops using PuTTY and Cangaroo to verify the physical CAN adapters and connections</li>
+          <li>Tested DroneCAN and UAVCAN communication to validate GUI software compatibility with Candlelight/SLCAN adapter firmware</li>
+          <li>Systematically tested communication between a computer and the OC-210 using all described CAN configurations and serial command methods</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Isolated the failure to the OC-210, verifying that the CAN adapters, connections, and GUI software could successfully transmit and receive CAN data</li>
+          <li>Confirmed the charger produced no “heartbeat” or response to serial commands, demonstrating that the unit was damaged beyond repair</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">University of Hawaiʻi · SOEST Internship</p>
+      <h3>RAUV Upper Pressure Vessel Redesign</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/pv-baseplates.jpg" alt="3D-printed red baseplate components for the pressure vessel">
+          <img src="assets/img/pv-assembly.jpg" alt="Upper pressure vessel with red baseplates installed">
+          <img src="assets/img/pv-internals.jpg" alt="Internal wiring of the redesigned pressure vessel">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Redesigned the internal layout of an existing BlueRobotics pressure vessel to accommodate an upgraded thruster power system and improved cooling.</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Built a physical prototype for a new baseplate using existing components to evaluate different component layouts and maximize available space.</li>
+          <li>Used insights from the prototype to design a new baseplate in SolidWorks, then tested the first iteration and identified opportunities for improvement.</li>
+          <li>Developed a second-generation design based on testing and iterative refinement. The focus of the second generation was to improve cable routing, and increase clearances between conductive components to reduce the risk of short circuit.</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Created a more space-efficient design that fit 8 ESC 500s which are 300% larger than the original ESC 200s—along with a cooling fan within the existing pressure-vessel constraints.</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">University of Hawaiʻi · SOEST Internship</p>
+      <h3>Blue Robotics ESC 500 Thermal Behavior Testing</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/esc-test-1.jpg" alt="Arduino-based test rig for ESC thermal testing">
+          <img src="assets/img/esc-test-2.jpg" alt="Thruster assembly during underwater thermal testing">
+          <img class="fit" src="assets/img/esc-graph.jpg" alt="Graph of ESC temperature over time">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Designed and conducted an experiment to quantify heat generation from an upgraded thruster system inside a sealed pressure vessel</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Prototyped a test setup with existing power system and thruster assembly along with an Arduino and custom temperature monitoring system</li>
+          <li>Developed Arduino IDE and Python scripts with the help of AI to control throttle and log temperature, voltage, and timestamps in a CSV file</li>
+          <li>Conducted multiple underwater tests with upgraded propulsion system and analyzed ESC temperature data to characterize transient and steady-state thermal behavior</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Determined an average thermal time constant of τ = 4:21 and steady-state ESC 500 temperature of 321.7 K, providing data for an upcoming journal publication</li>
+          <li>Demonstrated that the upgraded thruster system could operate safely within the sealed pressure vessel based on measured thermal performance</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">University of Hawaiʻi · SOEST Internship</p>
+      <h3>Wibotic Charging System Troubleshooting</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/wibotic-1.jpg" alt="WiBotic PCB under inspection">
+          <img src="assets/img/wibotic-2.jpg" alt="Oscilloscope measurement of the WiBotic charging system">
+          <img src="assets/img/wibotic-3.jpg" alt="Close-up of WiBotic PCB antenna and components">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Troubleshot and diagnosed failures in a Wibotic inductive charging system (OC-210 and TR-110)</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Analyzed PCB components with a multimeter and oscilloscope, identifying a defective capacitor and modifying capacitance values to tune inductive charging frequency</li>
+          <li>Identified the onboard ceramic chip antenna through PCB markings and patent research, then replaced it with a larger antenna to attempt to restore radio communication</li>
+          <li>Diagnosed system behavior through the Wibotic GUI, packet sniffing, and serial communication.</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Determined the charging system was not viable for underwater operation after identifying PCB damage, missing components, and loss of radio communication across multiple diagnostic methods</li>
+          <li>Used the failure analysis to demonstrate the need to investigate alternative charging solutions</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">University of Hawaiʻi · SOEST Internship</p>
+      <h3>Battery Harness &amp; Voltage Monitoring System</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/batt-harness-1.jpg" alt="LiPo battery pack with harness attached">
+          <img src="assets/img/batt-harness-2.jpg" alt="Battery harness with voltage monitoring on protoboard">
+          <img src="assets/img/batt-harness-3.jpg" alt="Wiring detail of the battery harness">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Designed and fabricated a 2S2P LiPo battery harness with integrated voltage monitoring for individual batteries</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Developed the wiring architecture and calculated voltage-divider values to meet system voltage and current requirements for the monitoring system</li>
+          <li>Fabricated battery harness though soldering and crimping components, and assembled the voltage monitoring circuit on a protoboard</li>
+          <li>Developed a Python script to calculate individual battery voltages according to probes and integrated an ADS1115 ADC with an NVIDIA Jetson NX to acquire the data</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Fabricated a 29.6 V, 20 Ah battery system with individual battery voltage monitoring to identify under/overvoltage conditions during charging and operation</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">University of Hawaiʻi · SOEST Internship</p>
+      <h3>Battery Temperature Monitoring &amp; Safety System</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/batt-temp-1.jpg" alt="Battery bank with temperature sensors attached">
+          <img src="assets/img/batt-temp-2.jpg" alt="Four-node thermistor protoboard for battery temperature monitoring">
+          <img src="assets/img/batt-temp-3.jpg" alt="Jetson Xavier integrated with the temperature monitoring system">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Designed and fabricated a 4-node temperature monitoring system to monitor RAUV battery temperatures during charging</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Designed thermistor-based voltage divider circuits and integrated an ADS1115 ADC to convert temperature measurements into digital data</li>
+          <li>Fabricated a four-node protoboard and integrated the ADS1115 with the onboard NVIDIA Jetson Xavier via I²C</li>
+          <li>Developed a Python monitoring system to calculate individual battery temperatures and trigger emergency shutdown conditions</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Built and integrated a 4-channel battery temperature safety system capable of monitoring all four LiPo batteries and detecting thermal conditions that could lead to thermal runaway</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">University of Hawaiʻi · SOEST Internship</p>
+      <h3>2026 Internship: RAUV Power &amp; Propulsion System Design</h3>
+        <div class="slide-images imgs-2">
+          <img src="assets/img/capstone-1.jpg" alt="Completed RAUV power and propulsion system on a lab cart">
+          <img src="assets/img/capstone-2.jpg" alt="Thruster and pressure vessel components ready for testing">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Redesigned and integrated the power and propulsion system of a Resident Autonomous Underwater Vehicle (RAUV) for SOEST at the University of Hawaiʻi at Mānoa.</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Redesigned the BlueROV Heavy's upper pressure vessel to accommodate larger electrical components required for higher-power propulsion</li>
+          <li>Designed and fabricated a custom LiPo battery system with integrated voltage and temperature monitoring systems that delivering 2× the original voltage and capacity, while maintaining the existing size constraints</li>
+          <li>Conducted underwater testing to characterize current draw, power, and heat generation to ensure safety of design</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Validated the upgraded power and propulsion systems through fabrication and underwater testing, enabling higher-power RAUV operation</li>
+          <li>Advanced the RAUV toward deployment while demonstrating mechanical design, electrical integration, fabrication, and experimental testing skills.</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Coursework &amp; personal builds</p>
+      <h2>Other Projects</h2>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">Coursework</p>
+      <h3>Autocad Hydrant Foundation Rendering</h3>
+        <div class="slide-images imgs-1">
+          <img src="assets/img/hydrant.jpg" alt="AutoCAD drawing of a concrete water hydrant foundation">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Created an AutoCAD drawing of a concrete water hydrant foundation</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Developed dimensioned front and top views specifying foundation geometry, materials, and construction details</li>
+          <li>Organized the drawing with the layer feature to distinguish structure dimensions and fill materials</li>
+          <li>Overlaid the tap stand and water tie-in locations on Google Maps imagery, with latitude/longitude coordinates</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Produced a detailed drawing with the dimensions, materials, and site location required to physically build it</li>
+          <li>My professor complemented the thoroughness and completeness of the drawings and plans to implement the tap stand.</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">Coursework</p>
+      <h3>Almond Auger Assembly</h3>
+        <div class="slide-images imgs-2">
+          <img class="fit" src="assets/img/auger-hero.jpg" alt="SolidWorks render of an almond auger assembly">
+          <img src="assets/img/auger-design.jpg" alt="Design considerations and calculations for the almond auger">
+          <img src="assets/img/auger-parts.jpg" alt="Almond auger assembly parts list and dimensioned drawing">
+          <img src="assets/img/auger-schematic.jpg" alt="Electrical schematic for the almond auger system">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Designed a complete auger assembly in SolidWorks, integrating custom and commercially available components</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Calculated required screw diameter, pitch, horsepower, and RPM based on almond properties and a 5,000 kg/h flow rate</li>
+          <li>Selected compatible McMaster-Carr components and designed custom screw, trough, and support subassemblies in SolidWorks</li>
+          <li>Created dimensioned drawings of notable components and electrical schematics for the system</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Produced a fully constrained assembly and validated the design with a SolidWorks motion simulation</li>
+          <li>Earned an A and special recognition from my professor for the design's quality.</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">Coursework</p>
+      <h3>Conveyor Manipulation Competition</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/conveyor-1.jpg" alt="3D-printed conveyor manipulation mechanism, isometric view">
+          <img src="assets/img/conveyor-2.jpg" alt="3D-printed conveyor manipulation mechanism, close-up view">
+          <img src="assets/img/conveyor-3.jpg" alt="3D-printed conveyor manipulation mechanism installed on the conveyor rail">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Designed a 3D-printed system in Solidworks to rotate and redirect five blocks through a conveyor system without contacting restricted surfaces for a competition</li>
+          <li>Strove to minimize print time and material volume while maintaining reliable operation</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Compared multiple methods of manipulation, including bars, wheels, claws, and ramps, before selecting the simplest viable solution</li>
+          <li>Designed and simulated mechanisms in SolidWorks to verify dimensions, clearances, and motion within the conveyor assembly</li>
+          <li>Prototyped, 3D-printed, and physically tested the final design, iterating on fit and performance</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Placed 2nd in the class, achieving the fastest print time and second-lowest print volume while successfully directing all five blocks into the final trough</li>
+          <li>Produced a rigid, repeatable mechanism that consistently manipulated the blocks without contacting restricted surfaces</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">Coursework</p>
+      <h3>Residential Energy Efficiency Optimization</h3>
+        <div class="slide-images imgs-4">
+          <img src="assets/img/energy-house1.jpg" alt="Poll cottage">
+          <img src="assets/img/energy-house2.jpg" alt="Mandeville Cottage">
+          <img src="assets/img/energy-house3.jpg" alt="Fairbanks cottage">
+          <img src="assets/img/energy-house4.jpg" alt="Mast cottage">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Developed three energy-efficiency proposals for improving four Hope College cottages, balancing number of buildings included, gas reduction, project cost, rebates, and payback time within a $20,000 budget</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Analyzed renovation costs, projected energy savings, and available Michigan energy rebates to identify cost-effective combinations of upgrades</li>
+          <li>Developed and optimized three proposals targeting maximum energy savings, minimum upfront cost, and concentrated improvements to two buildings</li>
+          <li>Compared upgrade combinations by net cost, annual gas reduction, and payback period to refine each proposal and maximize its intended objective</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>One proposal advanced to the final round and placed 2nd overall, reducing projected gas consumption by 31% (2,544 therms/year)</li>
+          <li>Proposed upgrades totaling $17,073 with rebates reducing net cost to $9,644, resulting in an estimated 8.8-year payback</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">Coursework</p>
+      <h3>Various CAD Models</h3>
+        <div class="slide-images imgs-4">
+          <img src="assets/img/turbine-1.jpg" alt="SolidWorks model of a wind turbine assembly">
+          <img src="assets/img/turbine-2.jpg" alt="Engineering drawing of a wind turbine blade">
+          <img src="assets/img/cad-1.jpg" alt="CAD model of a structural bracket assembly">
+          <img src="assets/img/cad-2.jpg" alt="CAD model of a lofted part">
+          <img src="assets/img/cad-7.jpg" alt="CAD model of a sheet metal tray">
+          <img src="assets/img/cad-8.jpg" alt="CAD model of a pair of green enclosure parts">
+          <img src="assets/img/cad-3.jpg" alt="Dimensioned drawing of a door and hinge assembly">
+          <img src="assets/img/cad-6.jpg" alt="Dimensioned drawing with mass properties of a machined part">
+          <img src="assets/img/cad-9.jpg" alt="CAD model of a hinge bracket part">
+          <img src="assets/img/cad-4.jpg" alt="CAD model of a flanged mounting part">
+          <img src="assets/img/cad-5.jpg" alt="CAD model of a stepped machined block">
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">Personal Project</p>
+      <h3>Crazy Cart Upgrades</h3>
+        <div class="slide-images imgs-3">
+          <img class="fit" src="assets/img/crazycart-1.jpg" alt="Upgraded electric drift kart, side view">
+          <img src="assets/img/crazycart-2.jpg" alt="Upgraded electric drift kart, top-down view">
+          <img src="assets/img/crazycart-3.jpg" alt="Upgraded electric drift kart, angled view">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Restored and upgraded a childhood electric drift kart for higher performance and improved usability</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Upgraded the powertrain from 250 W / 24 V to 500 W / 48 V, replacing the motor sprocket and controller to support increased power</li>
+          <li>Designed and 3D-printed custom battery and switch mounts in Fusion 360 to integrate the new electrical system with the existing frame</li>
+          <li>Modified the seat and wiring to improve ergonomics and integrate the upgraded controls with the original accelerator and switches and refinished the frame</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Increased tested top speed from 9–12 mph to 25 mph with higher acceleration, and doubled motor power</li>
+          <li>Increased rider legroom and moved center of mass to above the rear wheels to improve drifting</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">Personal Project</p>
+      <h3>Mountain Bike Kicker Ramp</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/bikeramp-1.jpg" alt="Wooden mountain bike kicker ramp, side view">
+          <img src="assets/img/bikeramp-2.jpg" alt="Wooden mountain bike kicker ramp, front view">
+          <img src="assets/img/bikeramp-3.jpg" alt="Wooden mountain bike kicker ramp installed in garage">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Designed and fabricated a 72 × 48 × 30 in. wooden kicker ramp, optimizing the geometry for controlled mountain-bike jumps and rollover</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Researched existing ramp designs to determine geometry, plywood thickness, internal bracing, and structural requirements</li>
+          <li>Developed the ramp profile and fabricated the structure using jigsaw, drill, cross-bracing, and mitered joints</li>
+          <li>Added 2x4s for internal framing and structural supports to maintain rigidity while refining the transition and top lip for predictable takeoff</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Built a rigid, durable ramp that has remained functional without significant wear or warping after approximately five years of use</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">Coursework</p>
+      <h3>Mountain Bike Frame Material Analysis</h3>
+        <div class="slide-images imgs-1-wide">
+          <img class="fit" src="assets/img/frame-matrix.jpg" alt="Weighted decision matrix comparing frame materials">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Evaluated aluminum, steel, titanium, and carbon fiber as mountain-bike frame materials using mechanical properties and a weighted decision matrix</li>
+          <li>Compared materials based on strength, stiffness, and density to identify the optimal material for frame performance</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Researched industry-standard alloys and composites used in mountain-bike frames and compiled their mechanical properties from Matweb</li>
+          <li>Developed a weighted decision matrix using 6061 aluminum as the baseline, prioritizing flexural modulus and yield strength based on frame performance requirements</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Identified carbon fiber as the optimal material for the selected criteria; this aligns with its widespread use in high-performance mountain-bike frames</li>
+          <li>My professor noted the real-world application of this topic and I received an A on the project.</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="slide-block">
+      <p class="slide-tag">Personal Project</p>
+      <h3>Pronto Moped Rebuild</h3>
+        <div class="slide-images imgs-3">
+          <img src="assets/img/moped-1.jpg" alt="Pronto moped engine repair">
+          <img src="assets/img/moped-2.jpg" alt="Pronto moped carburetor work">
+          <img src="assets/img/moped-3.jpg" alt="Restored Pronto moped">
+        </div>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Troubleshot and rebuilt a non-running Pronto Moped to reliable operating condition</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Systematically diagnosed the engine by evaluating the requirements for combustion (air, fuel, spark, compression) and using the results to identify sources of failure</li>
+          <li>Replaced vacuum lines and fuel filter; cleaned all filters and spark plug; disassembled, cleaned, and rebuilt the carburetor.</li>
+          <li>Iteratively tested the engine after each repair to identify remaining issues and verify improvement</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Restored the moped to reliable, repeatable operation, with the engine starting and running smoothly.</li>
+          <li>Converted a non-functional vehicle into my main transportation for the summer, using it to commute to my internship every day.</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+    <div class="slide-block">
+      <p class="slide-tag">Coursework · Software</p>
+      <h3>Class Registration Ranking Software</h3>
+        <pre class="pseudocode">Initialize points = 0
+
+Prompt user for how many semesters they’ve been at Hope
+Scan semesters
+points += semesters
+
+Prompt user for if they have on campus employment
+Scan ans (character)
+
+if (ans == 'Y' || ans == 'y')
+    points += 1
+
+    Prompt user if they are a dorm RA
+    Scan ans
+    if (ans == 'Y' || ans == 'y')
+        points += 2
+    end if
+
+    Prompt user if they are a cott RA
+    Scan ans
+    if (ans == 'Y' || ans == 'y')
+        points += 1
+    end if
+end if
+
+Prompt user if they are a student athlete
+Scan ans
+if (ans == 'Y' || ans == 'y')
+    points += 3
+end if
+
+Prompt user if they are part of Hope Ready for Life or caretaking cohorts
+Scan ans
+if (ans == 'Y' || ans == 'y')
+    points += 10
+end if
+
+Prompt user for number of transfer credits
+Scan t_credits
+
+Prompt user for number of credits completed at Hope
+Scan h_credits
+
+p_credits = ((t_credits/2)+h_credits)/ 5
+points += p_credits
+
+
+if (points &gt; 40)
+    print registration time
+else if (points &gt; 33)
+    print registration time
+else if (points &gt; 30)
+    print registration time
+else if (points &gt; 27)
+    print registration time
+else if (points &gt; 24)
+    print registration time
+else if (points &gt; 21)
+    print registration time
+else if (points &gt; 18)
+    print registration time
+else if (points &gt; 15)
+    print registration time
+else if (points &gt; 12)
+    print registration time
+else if (points &gt; 9)
+    print registration time
+else if (points &gt; 6)
+    print registration time
+else
+    print registration time
+end if
+
+return</pre>
+        <div class="whr-grid">
+          <div class="whr-col">
+            <h4>What</h4>
+            <ul>
+          <li>Developed a C program to improve the fairness and consistency of student course registration scheduling</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>How</h4>
+            <ul>
+          <li>Interviewed peers to identify registration priorities and determine the relative importance of each factor</li>
+          <li>Translated feedback into a weighted algorithm that adjusted factor priorities and weighting based on peer responses</li>
+          <li>Developed pseudocode to establish program logic before manually writing the C program.</li>
+          <li>Tested valid inputs and user-error cases to identify bugs and refine program functionality</li>
+            </ul>
+          </div>
+          <div class="whr-col">
+            <h4>Results</h4>
+            <ul>
+          <li>Program automatically assigned students to 1 of 12 registration slots based on credits, class year, on-campus commitments, and disability needs</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications" class="certifications">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Credentials</p>
+      <h2>Certifications</h2>
+    </div>
+    <img class="cert-image" src="assets/img/solidworks-cert.jpg" alt="SolidWorks CAD Design Associate (CSWA) certificate">
+  </div>
+</section>
+
+<section id="resume" class="resume">
+  <div class="wrap">
+    <h2>Want the full resume?</h2>
+    <p>Education, research, work experience, and skills in one PDF.</p>
+    <a href="assets/resume/Jacob_Gehring_Resume.pdf" target="_blank" class="btn btn-primary">Download resume (PDF)</a>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <h3>Let's talk.</h3>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:jacob.gehring@hope.edu">jacob.gehring@hope.edu</a>
+        <a href="tel:8593978869">(859) 397-8869</a>
+        <span>Holland, Michigan</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Jacob Gehring</span>
+      <span>Built from an engineering portfolio deck</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    a.addEventListener('click', function(){
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>
